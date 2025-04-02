@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "754865869864",
+    "project_id": "atiqlo",
+    "storage_bucket": "atiqlo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754865869864:android:794d29ae4320499b7c911d",
+        "android_client_info": {
+          "package_name": "com.example.atiqlo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUUGLHuhJGTy6WLBA5Lny7ntQyBbRYFM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
