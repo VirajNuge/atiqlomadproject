@@ -43,7 +43,6 @@ dependencies:
   cloudinary_flutter: ^1.0.0
   cloudinary_url_gen: ^1.0.0
   smooth_page_indicator: ^1.2.1
-  firebase_app_check: ^0.3.2+4
 
 dev_dependencies:
   flutter_test:

@@ -47,6 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'atiqlo',
     authDomain: 'atiqlo.firebaseapp.com',
     storageBucket: 'atiqlo.firebasestorage.app',
+
     measurementId: 'G-ZN3VKCB0QM',
   );
 

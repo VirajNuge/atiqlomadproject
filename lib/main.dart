@@ -1,29 +1,29 @@
 import 'package:firebase_core/firebase_core.dart'; // Firebase core import
 import 'package:flutter/material.dart';
 import 'firebase_options.dart'; // Firebase options for platform-specific initialization
-import 'package:flutter/foundation.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth
 import 'loginPage.dart'; // Import login page
 import 'homeScreen.dart'; // Import home screen
+import 'frontPage.dart';
 
 // Cloudinary packages
 import 'package:cloudinary_flutter/cloudinary_context.dart';
-import 'package:cloudinary_flutter/image/cld_image.dart';
 import 'package:cloudinary_url_gen/cloudinary.dart';
 
 void main() async {
-  // Ensure Widgets are initialized before the app starts
+  // Ensure Flutter engine and Firebase are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with the platform-specific options from firebase_options.dart
+  // Initialize Firebase with platform-specific options
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Initialize Cloudinary SDK
   CloudinaryContext.cloudinary = Cloudinary.fromCloudName(
-    cloudName: 'your_cloud_name',
-  ); // Replace with your Cloud Name
+    cloudName:
+        'your_cloud_name', // <-- Replace with your actual Cloudinary cloud name
+  );
 
-  // Run the app once Firebase is initialized
+  // Start the app
   runApp(const MyApp());
 }
 
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: AuthWrapper(), // Use AuthWrapper to check user login state
+      home: AuthWrapper(), // Checks user login state
     );
   }
 }
@@ -45,20 +45,24 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
-      stream:
-          FirebaseAuth.instance
-              .authStateChanges(), // Check if user is logged in
+      stream: FirebaseAuth.instance.authStateChanges(), // Firebase Auth stream
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
+
         if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Scaffold(
+            body: Center(child: Text('Error: ${snapshot.error}')),
+          );
         }
+
         if (snapshot.hasData) {
-          return const HomePage(); // If logged in, navigate to home page
+          return const HomePage(); // User is logged in
         } else {
-          return const LoginPage(); // If not logged in, navigate to login page
+          return const FrontPage(); // User not logged in
         }
       },
     );
